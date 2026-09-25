@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>XAUUSD ICT Signal Scanner</title>
 
 <style>
@@ -50,6 +49,12 @@ h1 {
   margin: 10px 0;
 }
 
+.price-status {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
 .status {
   text-align: center;
   font-size: 24px;
@@ -62,11 +67,11 @@ h1 {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 15px;
 }
 
-.box {
-  background: #1f2937;
+.item {
+  background: #0f172a;
   padding: 15px;
   border-radius: 10px;
 }
@@ -74,17 +79,17 @@ h1 {
 .label {
   color: #9ca3af;
   font-size: 13px;
+  margin-bottom: 6px;
 }
 
 .value {
-  margin-top: 6px;
   font-size: 18px;
   font-weight: bold;
 }
 
 button {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
   border: none;
   border-radius: 10px;
   background: #2563eb;
@@ -95,17 +100,17 @@ button {
 }
 
 button:hover {
-  background: #1d4ed8;
+  opacity: 0.9;
 }
 
 .note {
+  text-align: center;
   color: #9ca3af;
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 12px;
   margin-top: 15px;
 }
 
-@media(max-width:600px) {
+@media (max-width: 650px) {
   .grid {
     grid-template-columns: 1fr;
   }
@@ -117,97 +122,167 @@ button:hover {
 
 <div class="container">
 
-<h1>🥇 XAUUSD ICT Scanner</h1>
+  <h1>🥇 XAUUSD ICT Scanner</h1>
 
-<div class="subtitle">
-Gold • Smart Money Concepts • ICT
-</div>
+  <div class="subtitle">
+    Educational market-analysis dashboard
+  </div>
 
-<div class="card">
+  <div class="card">
 
-<div class="label">XAUUSD PRICE</div>
+    <div class="label" style="text-align:center;">
+      LIVE XAU/USD SPOT
+    </div>
 
-<div class="price" id="price">
---
-</div>
+    <div class="price" id="price">
+      Loading...
+    </div>
 
-<div class="status" id="signal">
-WAITING FOR SCAN
-</div>
+    <div class="price-status" id="priceStatus">
+      Connecting to market data...
+    </div>
 
-</div>
+  </div>
 
-<div class="card">
+  <div class="card">
 
-<h2>Market Analysis</h2>
+    <div class="status" id="signal">
+      ⏳ READY TO SCAN
+    </div>
 
-<div class="grid">
+  </div>
 
-<div class="box">
-<div class="label">HTF Bias</div>
-<div class="value" id="bias">Waiting</div>
-</div>
+  <div class="card">
 
-<div class="box">
-<div class="label">Liquidity</div>
-<div class="value" id="liquidity">Waiting</div>
-</div>
+    <div class="grid">
 
-<div class="box">
-<div class="label">FVG</div>
-<div class="value" id="fvg">Waiting</div>
-</div>
+      <div class="item">
+        <div class="label">HTF Bias</div>
+        <div class="value" id="bias">Waiting...</div>
+      </div>
 
-<div class="box">
-<div class="label">Market Structure</div>
-<div class="value" id="structure">Waiting</div>
-</div>
+      <div class="item">
+        <div class="label">Liquidity</div>
+        <div class="value" id="liquidity">Waiting...</div>
+      </div>
 
-<div class="box">
-<div class="label">Entry</div>
-<div class="value" id="entry">---</div>
-</div>
+      <div class="item">
+        <div class="label">FVG</div>
+        <div class="value" id="fvg">Waiting...</div>
+      </div>
 
-<div class="box">
-<div class="label">Stop Loss</div>
-<div class="value" id="sl">---</div>
-</div>
+      <div class="item">
+        <div class="label">Market Structure</div>
+        <div class="value" id="structure">Waiting...</div>
+      </div>
 
-<div class="box">
-<div class="label">Take Profit</div>
-<div class="value" id="tp">---</div>
-</div>
+      <div class="item">
+        <div class="label">Entry</div>
+        <div class="value" id="entry">---</div>
+      </div>
 
-<div class="box">
-<div class="label">Risk / Reward</div>
-<div class="value" id="rr">---</div>
-</div>
+      <div class="item">
+        <div class="label">Stop Loss</div>
+        <div class="value" id="sl">---</div>
+      </div>
 
-</div>
+      <div class="item">
+        <div class="label">Take Profit</div>
+        <div class="value" id="tp">---</div>
+      </div>
 
-</div>
+      <div class="item">
+        <div class="label">Risk / Reward</div>
+        <div class="value" id="rr">---</div>
+      </div>
 
-<div class="card">
+    </div>
 
-<button onclick="scanMarket()">
-🔎 SCAN XAUUSD
-</button>
+  </div>
 
-<div class="note">
-The scanner will only generate a trade idea when the required conditions
-are confirmed. No setup = WAIT.
-</div>
+  <div class="card">
 
-</div>
+    <button onclick="scanMarket()">
+      🔎 SCAN XAUUSD
+    </button>
+
+    <div class="note">
+      This scanner is for educational analysis only.
+    </div>
+
+  </div>
 
 </div>
 
 <script>
 
+const API_URL =
+  "https://api.gold-api.com/price/XAU";
+
+async function getGoldPrice() {
+
+  const priceElement =
+    document.getElementById("price");
+
+  const statusElement =
+    document.getElementById("priceStatus");
+
+  try {
+
+    statusElement.innerText =
+      "Connecting to live gold data...";
+
+    const response =
+      await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error("API error");
+    }
+
+    const data =
+      await response.json();
+
+    let price = null;
+
+    if (typeof data === "number") {
+      price = data;
+    }
+
+    if (data && data.price) {
+      price = data.price;
+    }
+
+    if (data && data.XAU && data.XAU.price) {
+      price = data.XAU.price;
+    }
+
+    if (!price) {
+      throw new Error("Price not found");
+    }
+
+    priceElement.innerText =
+      "$" + Number(price).toFixed(2);
+
+    statusElement.innerText =
+      "🟢 Live XAU/USD price connected";
+
+  } catch (error) {
+
+    priceElement.innerText =
+      "---";
+
+    statusElement.innerText =
+      "🔴 Unable to load market price";
+
+    console.log(error);
+  }
+}
+
+
 function scanMarket() {
 
   document.getElementById("signal").innerText =
-    "🔍 ANALYZING MARKET...";
+    "⏳ ANALYZING...";
 
   document.getElementById("bias").innerText =
     "Analyzing";
@@ -220,6 +295,19 @@ function scanMarket() {
 
   document.getElementById("structure").innerText =
     "Analyzing";
+
+  document.getElementById("entry").innerText =
+    "---";
+
+  document.getElementById("sl").innerText =
+    "---";
+
+  document.getElementById("tp").innerText =
+    "---";
+
+  document.getElementById("rr").innerText =
+    "---";
+
 
   setTimeout(function() {
 
@@ -238,21 +326,14 @@ function scanMarket() {
     document.getElementById("structure").innerText =
       "Not confirmed";
 
-    document.getElementById("entry").innerText =
-      "---";
-
-    document.getElementById("sl").innerText =
-      "---";
-
-    document.getElementById("tp").innerText =
-      "---";
-
-    document.getElementById("rr").innerText =
-      "---";
-
   }, 1500);
 
 }
+
+
+getGoldPrice();
+
+setInterval(getGoldPrice, 60000);
 
 </script>
 
