@@ -3,116 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XAUUSD ICT Signal Scanner</title>
+<title>XAUUSD ICT Educational Scanner</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b1120;
+  color:white;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b1120;
-  color: white;
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:20px;
 }
 
-.container {
-  max-width: 950px;
-  margin: auto;
-  padding: 20px;
+h1{
+  text-align:center;
+  margin-bottom:5px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 5px;
+.subtitle{
+  text-align:center;
+  color:#9ca3af;
+  margin-bottom:25px;
 }
 
-.subtitle {
-  text-align: center;
-  color: #9ca3af;
-  margin-bottom: 25px;
+.card{
+  background:#111827;
+  border:1px solid #263244;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:20px;
 }
 
-.card {
-  background: #111827;
-  border: 1px solid #263244;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 20px;
+.price{
+  font-size:38px;
+  font-weight:bold;
+  text-align:center;
+  margin:10px 0;
 }
 
-.price {
-  font-size: 38px;
-  font-weight: bold;
-  text-align: center;
-  margin: 10px 0;
+.price-status{
+  text-align:center;
+  color:#9ca3af;
+  font-size:14px;
 }
 
-.price-status {
-  text-align: center;
-  color: #9ca3af;
-  font-size: 14px;
+.status{
+  text-align:center;
+  font-size:23px;
+  font-weight:bold;
+  padding:18px;
+  border-radius:12px;
+  background:#1f2937;
 }
 
-.status {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  padding: 18px;
-  border-radius: 12px;
-  background: #1f2937;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+.item{
+  background:#0f172a;
+  padding:15px;
+  border-radius:10px;
 }
 
-.item {
-  background: #0f172a;
-  padding: 15px;
-  border-radius: 10px;
+.label{
+  color:#9ca3af;
+  font-size:13px;
+  margin-bottom:6px;
 }
 
-.label {
-  color: #9ca3af;
-  font-size: 13px;
-  margin-bottom: 6px;
+.value{
+  font-size:18px;
+  font-weight:bold;
 }
 
-.value {
-  font-size: 18px;
-  font-weight: bold;
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-button {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 10px;
-  background: #2563eb;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
+button:hover{
+  opacity:.9;
 }
 
-button:hover {
-  opacity: 0.9;
+.note{
+  text-align:center;
+  color:#9ca3af;
+  font-size:12px;
+  margin-top:15px;
 }
 
-.note {
-  text-align: center;
-  color: #9ca3af;
-  font-size: 12px;
-  margin-top: 15px;
-}
-
-@media (max-width: 650px) {
-  .grid {
-    grid-template-columns: 1fr;
+@media(max-width:650px){
+  .grid{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -122,218 +120,301 @@ button:hover {
 
 <div class="container">
 
-  <h1>🥇 XAUUSD ICT Scanner</h1>
+<h1>🥇 XAUUSD ICT Scanner</h1>
 
-  <div class="subtitle">
-    Educational market-analysis dashboard
-  </div>
+<div class="subtitle">
+Educational market-analysis dashboard
+</div>
 
-  <div class="card">
+<div class="card">
 
-    <div class="label" style="text-align:center;">
-      LIVE XAU/USD SPOT
-    </div>
+<div class="label" style="text-align:center;">
+LIVE XAU/USD SPOT
+</div>
 
-    <div class="price" id="price">
-      Loading...
-    </div>
+<div class="price" id="price">
+Loading...
+</div>
 
-    <div class="price-status" id="priceStatus">
-      Connecting to market data...
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="status" id="signal">
-      ⏳ READY TO SCAN
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="grid">
-
-      <div class="item">
-        <div class="label">HTF Bias</div>
-        <div class="value" id="bias">Waiting...</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Liquidity</div>
-        <div class="value" id="liquidity">Waiting...</div>
-      </div>
-
-      <div class="item">
-        <div class="label">FVG</div>
-        <div class="value" id="fvg">Waiting...</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Market Structure</div>
-        <div class="value" id="structure">Waiting...</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Entry</div>
-        <div class="value" id="entry">---</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Stop Loss</div>
-        <div class="value" id="sl">---</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Take Profit</div>
-        <div class="value" id="tp">---</div>
-      </div>
-
-      <div class="item">
-        <div class="label">Risk / Reward</div>
-        <div class="value" id="rr">---</div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <button onclick="scanMarket()">
-      🔎 SCAN XAUUSD
-    </button>
-
-    <div class="note">
-      This scanner is for educational analysis only.
-    </div>
-
-  </div>
+<div class="price-status" id="priceStatus">
+Connecting to market data...
+</div>
 
 </div>
+
+
+<div class="card">
+
+<div class="status" id="signal">
+⏳ COLLECTING MARKET DATA
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="grid">
+
+<div class="item">
+<div class="label">HTF Bias</div>
+<div class="value" id="bias">Waiting...</div>
+</div>
+
+<div class="item">
+<div class="label">Liquidity</div>
+<div class="value" id="liquidity">Waiting...</div>
+</div>
+
+<div class="item">
+<div class="label">FVG</div>
+<div class="value" id="fvg">Waiting...</div>
+</div>
+
+<div class="item">
+<div class="label">Market Structure</div>
+<div class="value" id="structure">Waiting...</div>
+</div>
+
+<div class="item">
+<div class="label">Current Price</div>
+<div class="value" id="current">---</div>
+</div>
+
+<div class="item">
+<div class="label">Recent High</div>
+<div class="value" id="high">---</div>
+</div>
+
+<div class="item">
+<div class="label">Recent Low</div>
+<div class="value" id="low">---</div>
+</div>
+
+<div class="item">
+<div class="label">Data Points</div>
+<div class="value" id="points">0</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<button onclick="scanMarket()">
+🔎 ANALYZE XAUUSD
+</button>
+
+<div class="note">
+Educational analysis only. Not a trading instruction.
+</div>
+
+</div>
+
+</div>
+
 
 <script>
 
 const API_URL =
-  "https://api.gold-api.com/price/XAU";
+"https://api.gold-api.com/price/XAU";
 
-async function getGoldPrice() {
+let prices = [];
 
-  const priceElement =
-    document.getElementById("price");
+async function getGoldPrice(){
 
-  const statusElement =
-    document.getElementById("priceStatus");
+const priceElement =
+document.getElementById("price");
 
-  try {
+const statusElement =
+document.getElementById("priceStatus");
 
-    statusElement.innerText =
-      "Connecting to live gold data...";
+try{
 
-    const response =
-      await fetch(API_URL);
+const response =
+await fetch(API_URL);
 
-    if (!response.ok) {
-      throw new Error("API error");
-    }
+if(!response.ok){
+throw new Error("API error");
+}
 
-    const data =
-      await response.json();
+const data =
+await response.json();
 
-    let price = null;
+let price =
+Number(data.price);
 
-    if (typeof data === "number") {
-      price = data;
-    }
+if(!Number.isFinite(price)){
+throw new Error("Invalid price");
+}
 
-    if (data && data.price) {
-      price = data.price;
-    }
+priceElement.innerText =
+"$" + price.toFixed(2);
 
-    if (data && data.XAU && data.XAU.price) {
-      price = data.XAU.price;
-    }
+document.getElementById("current").innerText =
+price.toFixed(2);
 
-    if (!price) {
-      throw new Error("Price not found");
-    }
+statusElement.innerText =
+"🟢 Live XAU/USD connected";
 
-    priceElement.innerText =
-      "$" + Number(price).toFixed(2);
+prices.push({
+price:price,
+time:Date.now()
+});
 
-    statusElement.innerText =
-      "🟢 Live XAU/USD price connected";
+if(prices.length > 100){
+prices.shift();
+}
 
-  } catch (error) {
+document.getElementById("points").innerText =
+prices.length;
 
-    priceElement.innerText =
-      "---";
+updateAnalysis();
 
-    statusElement.innerText =
-      "🔴 Unable to load market price";
+}catch(error){
 
-    console.log(error);
-  }
+priceElement.innerText =
+"---";
+
+statusElement.innerText =
+"🔴 Market data unavailable";
+
+console.log(error);
+
+}
+
 }
 
 
-function scanMarket() {
+function updateAnalysis(){
 
-  document.getElementById("signal").innerText =
-    "⏳ ANALYZING...";
+if(prices.length < 5){
 
-  document.getElementById("bias").innerText =
-    "Analyzing";
+document.getElementById("signal").innerText =
+"⏳ COLLECTING DATA...";
 
-  document.getElementById("liquidity").innerText =
-    "Analyzing";
+document.getElementById("bias").innerText =
+"Need more data";
 
-  document.getElementById("fvg").innerText =
-    "Analyzing";
+return;
 
-  document.getElementById("structure").innerText =
-    "Analyzing";
+}
 
-  document.getElementById("entry").innerText =
-    "---";
+const values =
+prices.map(x => x.price);
 
-  document.getElementById("sl").innerText =
-    "---";
+const current =
+values[values.length - 1];
 
-  document.getElementById("tp").innerText =
-    "---";
+const recent =
+values.slice(-5);
 
-  document.getElementById("rr").innerText =
-    "---";
+const high =
+Math.max(...recent);
+
+const low =
+Math.min(...recent);
+
+document.getElementById("high").innerText =
+high.toFixed(2);
+
+document.getElementById("low").innerText =
+low.toFixed(2);
 
 
-  setTimeout(function() {
+/* TREND */
 
-    document.getElementById("signal").innerText =
-      "⏳ WAIT — NO CONFIRMED SETUP";
+const first =
+recent[0];
 
-    document.getElementById("bias").innerText =
-      "Neutral";
+let bias =
+"Neutral";
 
-    document.getElementById("liquidity").innerText =
-      "Not confirmed";
+if(current > first){
+bias = "Bullish";
+}
+else if(current < first){
+bias = "Bearish";
+}
 
-    document.getElementById("fvg").innerText =
-      "Not confirmed";
+document.getElementById("bias").innerText =
+bias;
 
-    document.getElementById("structure").innerText =
-      "Not confirmed";
 
-  }, 1500);
+/* LIQUIDITY */
+
+let liquidity =
+"Not confirmed";
+
+if(current >= high){
+liquidity =
+"Near recent high";
+}
+else if(current <= low){
+liquidity =
+"Near recent low";
+}
+
+document.getElementById("liquidity").innerText =
+liquidity;
+
+
+/* SIMPLE STRUCTURE */
+
+let structure =
+"Range";
+
+if(current > first){
+structure =
+"Short-term bullish";
+}
+else if(current < first){
+structure =
+"Short-term bearish";
+}
+
+document.getElementById("structure").innerText =
+structure;
+
+
+/* FVG STATUS */
+
+document.getElementById("fvg").innerText =
+"Needs candle data";
+
+
+/* OVERALL STATUS */
+
+if(prices.length < 10){
+
+document.getElementById("signal").innerText =
+"⏳ COLLECTING MORE DATA";
+
+}else{
+
+document.getElementById("signal").innerText =
+"📊 MARKET DATA READY";
+
+}
+
+}
+
+
+function scanMarket(){
+
+updateAnalysis();
+
+document.getElementById("signal").innerText =
+"📊 ANALYSIS UPDATED";
 
 }
 
 
 getGoldPrice();
 
-setInterval(getGoldPrice, 60000);
+setInterval(getGoldPrice,60000);
 
 </script>
 
