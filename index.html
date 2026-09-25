@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold XAUUSD Signal Scanner</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .card {
+      background: #1f2937;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .signal {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      background: #374151;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #374151;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🥇 Gold XAUUSD Signal Scanner</h1>
+
+    <div class="card">
+
+      <div class="signal" id="signal">
+        WAITING
+      </div>
+
+      <div class="row">
+        <span>Symbol</span>
+        <span>XAUUSD</span>
+      </div>
+
+      <div class="row">
+        <span>Market Bias</span>
+        <span id="bias">Waiting...</span>
+      </div>
+
+      <div class="row">
+        <span>Timeframe</span>
+        <span>5M</span>
+      </div>
+
+      <div class="row">
+        <span>Entry</span>
+        <span id="entry">---</span>
+      </div>
+
+      <div class="row">
+        <span>Stop Loss</span>
+        <span id="sl">---</span>
+      </div>
+
+      <div class="row">
+        <span>Take Profit</span>
+        <span id="tp">---</span>
+      </div>
+
+      <button onclick="scanMarket()">
+        🔎 SCAN XAUUSD
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+    function scanMarket() {
+
+      document.getElementById("signal").innerText = "SCANNING...";
+      document.getElementById("bias").innerText = "Analyzing...";
+      document.getElementById("entry").innerText = "---";
+      document.getElementById("sl").innerText = "---";
+      document.getElementById("tp").innerText = "---";
+
+      setTimeout(function() {
+
+        document.getElementById("signal").innerText = "WAIT";
+        document.getElementById("bias").innerText = "NO CLEAR SETUP";
+
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
