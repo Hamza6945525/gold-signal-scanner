@@ -1,136 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gold XAUUSD Signal Scanner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111827;
-      color: white;
-      margin: 0;
-      padding: 20px;
-    }
+<title>XAUUSD ICT Signal Scanner</title>
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      text-align: center;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1120;
+  color: white;
+}
 
-    .card {
-      background: #1f2937;
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .signal {
-      font-size: 28px;
-      font-weight: bold;
-      text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      background: #374151;
-    }
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.subtitle {
+  text-align: center;
+  color: #9ca3af;
+  margin-bottom: 25px;
+}
 
-    button:hover {
-      background: #1d4ed8;
-    }
+.card {
+  background: #111827;
+  border: 1px solid #263244;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #374151;
-    }
-  </style>
+.price {
+  font-size: 38px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.status {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 18px;
+  border-radius: 12px;
+  background: #1f2937;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.box {
+  background: #1f2937;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.label {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.value {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.note {
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+@media(max-width:600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>🥇 Gold XAUUSD Signal Scanner</h1>
+<h1>🥇 XAUUSD ICT Scanner</h1>
 
-    <div class="card">
+<div class="subtitle">
+Gold • Smart Money Concepts • ICT
+</div>
 
-      <div class="signal" id="signal">
-        WAITING
-      </div>
+<div class="card">
 
-      <div class="row">
-        <span>Symbol</span>
-        <span>XAUUSD</span>
-      </div>
+<div class="label">XAUUSD PRICE</div>
 
-      <div class="row">
-        <span>Market Bias</span>
-        <span id="bias">Waiting...</span>
-      </div>
+<div class="price" id="price">
+--
+</div>
 
-      <div class="row">
-        <span>Timeframe</span>
-        <span>5M</span>
-      </div>
+<div class="status" id="signal">
+WAITING FOR SCAN
+</div>
 
-      <div class="row">
-        <span>Entry</span>
-        <span id="entry">---</span>
-      </div>
+</div>
 
-      <div class="row">
-        <span>Stop Loss</span>
-        <span id="sl">---</span>
-      </div>
+<div class="card">
 
-      <div class="row">
-        <span>Take Profit</span>
-        <span id="tp">---</span>
-      </div>
+<h2>Market Analysis</h2>
 
-      <button onclick="scanMarket()">
-        🔎 SCAN XAUUSD
-      </button>
+<div class="grid">
 
-    </div>
+<div class="box">
+<div class="label">HTF Bias</div>
+<div class="value" id="bias">Waiting</div>
+</div>
 
-  </div>
+<div class="box">
+<div class="label">Liquidity</div>
+<div class="value" id="liquidity">Waiting</div>
+</div>
 
-  <script>
-    function scanMarket() {
+<div class="box">
+<div class="label">FVG</div>
+<div class="value" id="fvg">Waiting</div>
+</div>
 
-      document.getElementById("signal").innerText = "SCANNING...";
-      document.getElementById("bias").innerText = "Analyzing...";
-      document.getElementById("entry").innerText = "---";
-      document.getElementById("sl").innerText = "---";
-      document.getElementById("tp").innerText = "---";
+<div class="box">
+<div class="label">Market Structure</div>
+<div class="value" id="structure">Waiting</div>
+</div>
 
-      setTimeout(function() {
+<div class="box">
+<div class="label">Entry</div>
+<div class="value" id="entry">---</div>
+</div>
 
-        document.getElementById("signal").innerText = "WAIT";
-        document.getElementById("bias").innerText = "NO CLEAR SETUP";
+<div class="box">
+<div class="label">Stop Loss</div>
+<div class="value" id="sl">---</div>
+</div>
 
-      }, 1500);
-    }
-  </script>
+<div class="box">
+<div class="label">Take Profit</div>
+<div class="value" id="tp">---</div>
+</div>
+
+<div class="box">
+<div class="label">Risk / Reward</div>
+<div class="value" id="rr">---</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<button onclick="scanMarket()">
+🔎 SCAN XAUUSD
+</button>
+
+<div class="note">
+The scanner will only generate a trade idea when the required conditions
+are confirmed. No setup = WAIT.
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function scanMarket() {
+
+  document.getElementById("signal").innerText =
+    "🔍 ANALYZING MARKET...";
+
+  document.getElementById("bias").innerText =
+    "Analyzing";
+
+  document.getElementById("liquidity").innerText =
+    "Analyzing";
+
+  document.getElementById("fvg").innerText =
+    "Analyzing";
+
+  document.getElementById("structure").innerText =
+    "Analyzing";
+
+  setTimeout(function() {
+
+    document.getElementById("signal").innerText =
+      "⏳ WAIT — NO CONFIRMED SETUP";
+
+    document.getElementById("bias").innerText =
+      "Neutral";
+
+    document.getElementById("liquidity").innerText =
+      "Not confirmed";
+
+    document.getElementById("fvg").innerText =
+      "Not confirmed";
+
+    document.getElementById("structure").innerText =
+      "Not confirmed";
+
+    document.getElementById("entry").innerText =
+      "---";
+
+    document.getElementById("sl").innerText =
+      "---";
+
+    document.getElementById("tp").innerText =
+      "---";
+
+    document.getElementById("rr").innerText =
+      "---";
+
+  }, 1500);
+
+}
+
+</script>
 
 </body>
 </html>
