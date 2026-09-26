@@ -11,21 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download XAUUSD 5M data
+      - name: Download candle data
         run: |
-          curl -L \
-            "https://raw.githubusercontent.com/getdata-finance/xauusd-5m-ohlcv-metals-historical-data/main/XAUUSD_5m.csv" \
-            -o XAUUSD_5m.csv
+          curl -L "https://raw.githubusercontent.com/getdata-finance/xauusd-5m-ohlcv-metals-historical-data/main/XAUUSD_5m.csv" -o XAUUSD_5m.csv
 
-      - name: Check downloaded file
+      - name: Check file
         run: |
           ls -lh XAUUSD_5m.csv
           head -5 XAUUSD_5m.csv
 
-      - name: Save candle data
+      - name: Save data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
